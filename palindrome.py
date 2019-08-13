@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*- 
+
 from collections import defaultdict
 import datrie
 
@@ -91,10 +93,10 @@ with open('output_triple.txt', 'w') as f:
     for w1 in sorted(words):
         cnt += 1
         for w3 in rtrie.prefixes(w1):
+            if len(w1) == len(w3):
+                continue
             w3 = w3[::-1]
             w2_suf = w1[-(len(w1) - len(w3)):]
-            if not w2_suf:
-                continue
             for w2 in rtrie.keys(w2_suf):
                 w2 = w2[::-1]
                 w2_pref = w2[:-len(w2_suf)]
